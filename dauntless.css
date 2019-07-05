@@ -1,0 +1,13 @@
+#successMessage {
+  visibility:hidden;
+  opacity:0;
+  transition:300ms;
+  display: none;
+}
+
+#errorMessage {
+  visibility:hidden;
+  opacity:0;
+  transition:300ms;
+  display: none;
+}
