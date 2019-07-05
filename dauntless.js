@@ -5,9 +5,10 @@ let username = document.querySelector(`#username`);
 let logoutLink = document.querySelector(`#logout`);
 let loginForm = document.querySelector(`#loginForm`);
 var users;
+var isLoggedIn = false;
 
 /* Variabltes */
-const orbTypes = ['fire','frost','nature','shock','neutral','dire','heroic','heroic+'];
+const orbTypes = ['blaze','frost','terra','shock','neutral','dull','shining','peerless'];
 
 initialize = function() {
 
@@ -16,6 +17,12 @@ initialize = function() {
   }
 
   login();
+
+  if (isLoggedIn) {
+    orbs.classList.remove('d-none');
+  }
+
+
 
 }
 
@@ -29,6 +36,8 @@ login = function() {
     return;
   }
 
+  isLoggedIn = true;
+
   username.innerText = `${loggedInUser.username}`;
   logoutLink.classList.remove('d-none');
   document.querySelector(`input[name='username']`).value = '';
@@ -41,6 +50,7 @@ logout = function() {
   let un = localStorage.username;
   let loggedInUser = getLoggedInUser();
   loggedInUser.isLoggedIn = false;
+  isLoggedIn = false;
   console.log(`loggedInUser:`,loggedInUser);
   updateUsers(loggedInUser);
   logoutLink.classList.add('d-none');
@@ -131,6 +141,26 @@ loginForm.addEventListener('submit',function(e) {
   console.log(`submit event:`,e);
   e.preventDefault();
   onLogin();
+});
+
+document.querySelectorAll(`.orb .fa-plus`).forEach(function(plus) {
+  plus.parentElement.addEventListener('click',function() {
+    console.log(`clicked a plus:`,this);
+    let id = this.previousElementSibling.getAttribute('id')
+    let type = id.split("_")[0];
+    let amt = parseInt(this.previousElementSibling.innerText);
+    console.log(`type: ${type}, amt: ${amt}`);
+  })
+});
+
+document.querySelectorAll(`.orb .fa-minus`).forEach(function(minus) {
+  minus.parentElement.addEventListener('click',function() {
+    console.log(`clicked a minus:`,this);
+    let id = this.previousElementSibling.previousElementSibling.getAttribute('id')
+    let type = id.split("_")[0];
+    let amt = parseInt(this.previousElementSibling.previousElementSibling.innerText);
+    console.log(`type: ${type}, amt: ${amt}`);
+  })
 });
 
 

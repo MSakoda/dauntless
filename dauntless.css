@@ -11,3 +11,8 @@
   transition:300ms;
   display: none;
 }
+
+.orb-img {
+  height:50px;
+  width:50px;
+}
