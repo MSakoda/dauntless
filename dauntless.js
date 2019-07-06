@@ -19,12 +19,12 @@ initialize = function() {
   login();
 
   if (isLoggedIn) {
-      updateDomOrbs();
+    updateDomOrbs();
     loggedInContainer.classList.remove('d-none');
   }
 }
 
-login = function() {
+login = function(showMessage) {
 
   let loggedInUser = JSON.parse(localStorage.users).find(u => u.isLoggedIn);
 
@@ -40,7 +40,9 @@ login = function() {
   logoutLink.classList.remove('d-none');
   document.querySelector(`input[name='username']`).value = '';
   loginCard.classList.add('d-none');
-  onMessage(`Successfully logged in as ${loggedInUser.username}`,'success');
+  if (showMessage) {
+      onMessage(`Successfully logged in as ${loggedInUser.username}`,'success');
+  }
 
   // Show logged in stuff
   loggedInContainer.classList.remove('d-none');
@@ -112,7 +114,7 @@ onLogin = function(){
   // save the users in localStorage
   localStorage.users = JSON.stringify(users);
 
-  login();
+  login(true);
 }
 
 onLogout = function() {
