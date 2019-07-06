@@ -22,7 +22,6 @@ initialize = function() {
       updateDomOrbs();
     loggedInContainer.classList.remove('d-none');
   }
-
 }
 
 login = function() {
